@@ -11,7 +11,7 @@ public interface HolidayInboundPort {
 
     List<HolidayResponse> getTheLastThreeHolidaysCelebrated(HolidayAnalysisRequest request);
 
-    List<CountryHolidayStatsResponse> getNumberOfHolidaysByCountry(HolidayAnalysisRequest request);
+    List<CountryHolidayStatsResponse> getNumberOfHolidaysByCountry(List<String> countries, Integer year);
 
-    CommonHolidaysResponse getCommonHolidaysBetweenCountries(HolidayAnalysisRequest request);
+    CommonHolidaysResponse getCommonHolidaysBetweenCountries(String firstCountry, String secondCountry, Integer year);
 }
