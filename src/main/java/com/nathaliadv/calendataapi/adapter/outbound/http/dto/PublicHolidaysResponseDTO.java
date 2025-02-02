@@ -1,8 +1,10 @@
 package com.nathaliadv.calendataapi.adapter.outbound.http.dto;
 
+import lombok.Data;
+
 import java.util.List;
 
-public record PublicHolidaysResponseDTO(
-        List<HolidayResponseDTO> holidays
-) {
+@Data
+public class PublicHolidaysResponseDTO {
+    private List<HolidayResponseDTO> holidays;
 }

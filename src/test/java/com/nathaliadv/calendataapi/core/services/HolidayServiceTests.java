@@ -111,7 +111,7 @@ public class HolidayServiceTests {
                     return "NL".equals(request.getCountryCode())? nlHolidays : mxHolidays;
                 });
 
-        List<CountryHolidayStatsResponse> result = holidayService.getNumberOfHolidaysByCountry(countries, year);
+        List<CountryHolidayStatsResponse> result = holidayService.getNumberOfNonWeekendHolidaysByCountry(countries, year);
 
         assertNotNull(result);
         assertEquals(2, result.size());

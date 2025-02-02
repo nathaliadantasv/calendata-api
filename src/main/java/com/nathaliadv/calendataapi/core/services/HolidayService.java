@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-@Service
 public class HolidayService implements HolidayInboundPort {
 
     private final HolidayDataOutboundPort holidayDataOutboundPort;
@@ -23,7 +22,7 @@ public class HolidayService implements HolidayInboundPort {
     }
 
     @Override
-    public List<CountryHolidayStatsResponse> getNumberOfHolidaysByCountry(List<String> countries, Integer year) {
+    public List<CountryHolidayStatsResponse> getNumberOfNonWeekendHolidaysByCountry(List<String> countries, Integer year) {
         List<CountryHolidayStatsResponse> result = new ArrayList<>();
         for (String country : countries) {
             List<HolidayResponse> holidaysInTheYear = getHolidaysFromYear(country, year);

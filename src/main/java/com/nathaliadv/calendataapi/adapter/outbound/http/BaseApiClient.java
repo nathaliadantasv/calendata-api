@@ -1,6 +1,8 @@
 package com.nathaliadv.calendataapi.adapter.outbound.http;
 
 import lombok.AllArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 @AllArgsConstructor
@@ -10,8 +12,10 @@ public abstract class BaseApiClient {
 
     private static final String URL_BASE = "https://date.nager.at/api/v3";
 
-    protected <T> T get(String suffixUrl, Class<T> responseType, Object... uriVariables) {
-        return restTemplate.getForObject(URL_BASE + suffixUrl, responseType, uriVariables);
+    protected <T> T get(String suffixUrl, ParameterizedTypeReference<T> responseType, Object... uriVariables) {
+        //return restTemplate.getForObject(URL_BASE + suffixUrl, responseType, uriVariables);
+        return restTemplate.exchange(URL_BASE + suffixUrl, HttpMethod.GET, null, responseType, uriVariables).getBody();
+
     }
 
     protected <T, R> R post(String suffixUrl, T request, Class<R> responseType) {
