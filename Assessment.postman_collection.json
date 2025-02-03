@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "e4f9368d-5107-4729-a592-eae325d4ab87",
+		"name": "Assessment ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41680254"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/holidays/last-three/NL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/holidays/last-three/NL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"holidays",
+						"last-three",
+						"NL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/holidays/non-weekend?year=2025&countryCodes=US,CA,NL,MX,BR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/holidays/non-weekend?year=2025&countryCodes=US,CA,NL,MX,BR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"holidays",
+						"non-weekend"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2025"
+						},
+						{
+							"key": "countryCodes",
+							"value": "US,CA,NL,MX,BR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/holidays/common?firstCountry=BR&secondCountry=NL&year=2025",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/holidays/common?firstCountry=BR&secondCountry=NL&year=2025",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"holidays",
+						"common"
+					],
+					"query": [
+						{
+							"key": "firstCountry",
+							"value": "BR"
+						},
+						{
+							"key": "secondCountry",
+							"value": "NL"
+						},
+						{
+							"key": "year",
+							"value": "2025"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
