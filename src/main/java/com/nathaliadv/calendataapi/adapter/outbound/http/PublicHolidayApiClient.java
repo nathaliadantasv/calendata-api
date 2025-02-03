@@ -1,7 +1,6 @@
 package com.nathaliadv.calendataapi.adapter.outbound.http;
 
 import com.nathaliadv.calendataapi.adapter.outbound.http.dto.HolidayResponseDTO;
-import com.nathaliadv.calendataapi.adapter.outbound.http.dto.PublicHolidaysResponseDTO;
 import com.nathaliadv.calendataapi.shared.exceptions.PublicHolidayApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;

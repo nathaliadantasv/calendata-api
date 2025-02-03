@@ -13,7 +13,6 @@ public abstract class BaseApiClient {
     private static final String URL_BASE = "https://date.nager.at/api/v3";
 
     protected <T> T get(String suffixUrl, ParameterizedTypeReference<T> responseType, Object... uriVariables) {
-        //return restTemplate.getForObject(URL_BASE + suffixUrl, responseType, uriVariables);
         return restTemplate.exchange(URL_BASE + suffixUrl, HttpMethod.GET, null, responseType, uriVariables).getBody();
 
     }
