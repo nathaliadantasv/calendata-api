@@ -28,7 +28,7 @@ public class HolidayService implements HolidayInboundPort {
             List<HolidayResponse> holidaysInTheYear = getHolidaysFromYear(country, year);
             result.add(CountryHolidayStatsResponse.from(holidaysInTheYear, country));
         }
-        return result;
+        return getSortedCountryHolidayStats(result);
     }
 
     @Override
@@ -56,6 +56,15 @@ public class HolidayService implements HolidayInboundPort {
                 .secondCountry(secondCountry)
                 .commonHolidays(commonHolidays)
                 .build();
+    }
+
+    public List<CountryHolidayStatsResponse> getSortedCountryHolidayStats(List<CountryHolidayStatsResponse> stats) {
+       if(stats.isEmpty()) {
+           return stats;
+       }
+        return stats.stream()
+                .sorted((a, b) -> Long.compare(b.numberOfHolidays(), a.numberOfHolidays()))
+                .collect(Collectors.toList());
     }
 
     private List<HolidayResponse> getHolidaysFromYear(String country, Integer year) {
