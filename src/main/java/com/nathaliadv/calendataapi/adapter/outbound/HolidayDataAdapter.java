@@ -5,9 +5,14 @@ import com.nathaliadv.calendataapi.adapter.outbound.http.dto.HolidayResponseDTO;
 import com.nathaliadv.calendataapi.core.model.HolidayResponse;
 import com.nathaliadv.calendataapi.core.model.HolidayAnalysisRequest;
 import com.nathaliadv.calendataapi.core.ports.outbound.HolidayDataOutboundPort;
-import com.nathaliadv.calendataapi.shared.exceptions.PublicHolidayApiException;
+import com.nathaliadv.calendataapi.shared.exceptions.BadGatewayException;
+import com.nathaliadv.calendataapi.shared.exceptions.BadRequestException;
+import com.nathaliadv.calendataapi.shared.exceptions.ServiceUnavailableException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 
@@ -22,10 +27,15 @@ public class HolidayDataAdapter implements HolidayDataOutboundPort {
         try {
             List<HolidayResponseDTO> responseDTO = publicHolidayApiClient.getPublicHolidays(request.getCountryCode(), request.getYear());
             return convertToHolidaysResponse(responseDTO);
-        } catch (PublicHolidayApiException e) {
-            log.error("Error calling PublicHoliday API for country: {} and year: {}", request.getCountryCode(), request.getYear(), e);
-            throw new PublicHolidayApiException("Error calling PublicHoliday API for country: "
-                    + request.getCountryCode() + " and year: " + request.getYear(), e);
+        } catch (HttpClientErrorException e) {
+            log.error("Client error occurred while fetching holidays for country: {} and year: {}", request.getCountryCode(), request.getYear(), e);
+            throw new BadRequestException("Client error occurred while fetching holidays.", e);
+        } catch (HttpServerErrorException e) {
+            log.error("Server error occurred while fetching holidays for country: {} and year: {}", request.getCountryCode(), request.getYear(), e);
+            throw new BadGatewayException("Server error occurred while fetching holidays.", e);
+        } catch (RestClientException e) {
+            log.error("Error occurred while calling PublicHoliday API for country: {} and year: {}", request.getCountryCode(), request.getYear(), e);
+            throw new ServiceUnavailableException("Service unavailable while fetching holidays.", e);
         } catch (Exception e) {
             log.error("Unexpected error occurred while fetching holidays for country: {} and year: {}", request.getCountryCode(), request.getYear(), e);
             throw new RuntimeException("Unexpected error while fetching holidays.", e);

@@ -26,7 +26,7 @@ public class HolidayController {
     private final HolidayInboundPort holidayInboundPort;
 
     @GetMapping("/last-three/{countryCode}")
-    public LastHolidaysResponseDTO getLastThreeHolidays(@PathVariable @NotBlank @Size(min = 2, max = 3) String countryCode) {
+    public LastHolidaysResponseDTO getLastThreeHolidays(@PathVariable @NotBlank @Size(min = 2, max = 2) String countryCode) {
         HolidayAnalysisRequest request = HolidayAnalysisRequest.fromCurrentDate(countryCode);
         List<HolidayResponse> holidays = holidayInboundPort.getTheLastThreeHolidaysCelebrated(request);
         return LastHolidaysResponseDTO.from(holidays);
@@ -34,15 +34,15 @@ public class HolidayController {
 
     @GetMapping("/non-weekend")
     public NonWeekendHolidaysResponseDTO getPublicHolidaysNotOnWeekends(@RequestParam @NotNull Integer year,
-                                                       @RequestParam @NotNull @Size(min = 1) List<@NotBlank @Size(min = 2, max = 3) String> countryCodes) {
+                                                       @RequestParam @NotNull @Size(min = 1) List<@NotBlank @Size(min = 2, max = 2) String> countryCodes) {
         List<CountryHolidayStatsResponse> holidaysNonWeekend =
                 holidayInboundPort.getNumberOfNonWeekendHolidaysByCountry(countryCodes, year);
         return NonWeekendHolidaysResponseDTO.from(holidaysNonWeekend);
     }
 
     @GetMapping("/common")
-    public CommonHolidaysResponseDTO getCommonHolidays(@RequestParam @NotBlank @Size(min = 2, max = 3) String firstCountry,
-                                    @RequestParam @NotBlank @Size(min = 2, max = 3) String secondCountry, @RequestParam @NotNull Integer year) {
+    public CommonHolidaysResponseDTO getCommonHolidays(@RequestParam @NotBlank @Size(min = 2, max = 2) String firstCountry,
+                                    @RequestParam @NotBlank @Size(min = 2, max = 2) String secondCountry, @RequestParam @NotNull Integer year) {
         CommonHolidaysResponse commonHolidays = holidayInboundPort.getCommonHolidaysBetweenCountries(firstCountry, secondCountry, year);
         return CommonHolidaysResponseDTO.from(commonHolidays);
     }

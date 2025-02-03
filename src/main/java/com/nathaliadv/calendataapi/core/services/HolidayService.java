@@ -59,10 +59,7 @@ public class HolidayService implements HolidayInboundPort {
     }
 
     private List<HolidayResponse> getHolidaysFromYear(String country, Integer year) {
-        HolidayAnalysisRequest request = HolidayAnalysisRequest.builder()
-                .countryCode(country)
-                .year(year)
-                .build();
+        HolidayAnalysisRequest request = HolidayAnalysisRequest.fromYearAndCountryCode(year, country);
         return holidayDataOutboundPort.getAllHolidaysByYearAndCountry(request);
     }
 
