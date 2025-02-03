@@ -1,6 +1,6 @@
 # CalenDataApi
 
-CalenDataApi is a Spring Boot application that interacts with the [Date Nager API](https://date.nager.at/api/) to retrieve holiday data for specified countries. The program can return:
+**CalenDataApi** is a Spring Boot application that interacts with the [Date Nager API](https://date.nager.at/api/) to retrieve holiday data for specified countries. The program can return:
 
 - The last three celebrated holidays for a given country.
 - The number of public holidays in a given year that do not fall on weekends, for one or more countries.
@@ -109,7 +109,7 @@ CalenDataApi is a Spring Boot application that interacts with the [Date Nager AP
 
 ## Installation
 
-To get started with **Public Holiday Retriever**, follow these steps:
+To get started with **CalenDataApi**, follow these steps:
 
 ### Prerequisites
 
